@@ -1,33 +1,31 @@
 using System;
 using System.Data;
 using Microsoft.Data.SqlClient;
-using System.Configuration;
 
 namespace POSAccountantApp.Database
 {
     public static class SqlConnectionHelper
     {
-        // TODO: Move to configuration file
-        private static readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=POSAccountingDB;Integrated Security=True;Connect Timeout=30;";
+        private static readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=POSAccountingDB;Integrated Security=True;Connect Timeout=30;TrustServerCertificate=True";
 
-        public static SqlConnection GetConnection()
+        public static Microsoft.Data.SqlClient.SqlConnection GetConnection()
         {
             try
             {
-                var connection = new SqlConnection(connectionString);
+                var connection = new Microsoft.Data.SqlClient.SqlConnection(connectionString);
                 connection.Open();
                 return connection;
             }
-            catch (SqlException ex)
+            catch (Microsoft.Data.SqlClient.SqlException ex)
             {
                 throw new Exception($"Database connection error: {ex.Message}", ex);
             }
         }
 
-        public static void ExecuteNonQuery(string query, SqlParameter[] parameters = null)
+        public static void ExecuteNonQuery(string query, Microsoft.Data.SqlClient.SqlParameter[] parameters = null)
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new Microsoft.Data.SqlClient.SqlCommand(query, connection))
             {
                 if (parameters != null)
                 {
@@ -38,17 +36,17 @@ namespace POSAccountantApp.Database
                 {
                     command.ExecuteNonQuery();
                 }
-                catch (SqlException ex)
+                catch (Microsoft.Data.SqlClient.SqlException ex)
                 {
                     throw new Exception($"Database query error: {ex.Message}", ex);
                 }
             }
         }
 
-        public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = null)
+        public static DataTable ExecuteQuery(string query, Microsoft.Data.SqlClient.SqlParameter[] parameters = null)
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new Microsoft.Data.SqlClient.SqlCommand(query, connection))
             {
                 if (parameters != null)
                 {
@@ -58,23 +56,23 @@ namespace POSAccountantApp.Database
                 try
                 {
                     var dataTable = new DataTable();
-                    using (var adapter = new SqlDataAdapter(command))
+                    using (var adapter = new Microsoft.Data.SqlClient.SqlDataAdapter(command))
                     {
                         adapter.Fill(dataTable);
                     }
                     return dataTable;
                 }
-                catch (SqlException ex)
+                catch (Microsoft.Data.SqlClient.SqlException ex)
                 {
                     throw new Exception($"Database query error: {ex.Message}", ex);
                 }
             }
         }
 
-        public static object ExecuteScalar(string query, SqlParameter[] parameters = null)
+        public static object ExecuteScalar(string query, Microsoft.Data.SqlClient.SqlParameter[] parameters = null)
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new Microsoft.Data.SqlClient.SqlCommand(query, connection))
             {
                 if (parameters != null)
                 {
@@ -85,7 +83,7 @@ namespace POSAccountantApp.Database
                 {
                     return command.ExecuteScalar();
                 }
-                catch (SqlException ex)
+                catch (Microsoft.Data.SqlClient.SqlException ex)
                 {
                     throw new Exception($"Database query error: {ex.Message}", ex);
                 }
@@ -125,10 +123,10 @@ namespace POSAccountantApp.Database
             try
             {
                 // Create database
-                using (var connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;"))
+                using (var connection = new Microsoft.Data.SqlClient.SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;TrustServerCertificate=True"))
                 {
                     connection.Open();
-                    using (var command = new SqlCommand(createDbQuery, connection))
+                    using (var command = new Microsoft.Data.SqlClient.SqlCommand(createDbQuery, connection))
                     {
                         command.ExecuteNonQuery();
                     }
