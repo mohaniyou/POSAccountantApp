@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using POSAccountantApp.Database;
 
 namespace POSAccountantApp
 {
@@ -16,12 +17,17 @@ namespace POSAccountantApp
             
             try
             {
-                Application.Run(new LoginForm());
+                // Initialize database first
+                SqlConnectionHelper.InitializeDatabase();
+
+                // Create and show login form
+                var loginForm = new LoginForm();
+                Application.Run(loginForm);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("A critical error occurred: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Application Error: {ex.Message}\n\nDetails: {ex.InnerException?.Message}", 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
