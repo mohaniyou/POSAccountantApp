@@ -90,23 +90,13 @@ namespace POSAccountantApp
 
             try
             {
-                // TODO: Implement authentication service
-                // var authService = new AuthService();
-                // var user = authService.Login(username, password);
-                
-                // Temporary demo login
-                if (username == "admin" && password == "admin")
+                var authService = new AuthService();
+                var user = authService.Login(username, password);
+
+                if (user != null)
                 {
-                    MessageBox.Show("Login successful!", "Success",
+                    MessageBox.Show($"Welcome, {user.FullName}!", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
-                    var user = new User 
-                    { 
-                        UserId = 1,
-                        Username = "admin",
-                        FullName = "System Administrator",
-                        Role = UserRole.Admin
-                    };
                     
                     var dashboard = new DashboardForm(user);
                     this.Hide();

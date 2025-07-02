@@ -154,32 +154,32 @@ namespace POSAccountantApp
 
         private void BtnPOS_Click(object sender, EventArgs e)
         {
-            // TODO: Open POS Form
-            MessageBox.Show("Opening POS...");
+            var posForm = new POSForm(currentUser);
+            posForm.ShowDialog();
         }
 
         private void BtnInventory_Click(object sender, EventArgs e)
         {
-            // TODO: Open Inventory Form
-            MessageBox.Show("Opening Inventory...");
+            var inventoryForm = new InventoryForm(currentUser);
+            inventoryForm.ShowDialog();
         }
 
         private void BtnAccounting_Click(object sender, EventArgs e)
         {
-            // TODO: Open Accounting Form
-            MessageBox.Show("Opening Accounting...");
+            // TODO: Create and implement AccountingForm
+            MessageBox.Show("Accounting module coming soon...");
         }
 
         private void BtnReports_Click(object sender, EventArgs e)
         {
-            // TODO: Open Reports Form
-            MessageBox.Show("Opening Reports...");
+            var reportsForm = new ReportsForm(currentUser);
+            reportsForm.ShowDialog();
         }
 
         private void BtnUsers_Click(object sender, EventArgs e)
         {
-            // TODO: Open User Management Form
-            MessageBox.Show("Opening User Management...");
+            // TODO: Create and implement UserManagementForm
+            MessageBox.Show("User Management module coming soon...");
         }
 
         private void BtnLogout_Click(object sender, EventArgs e)
