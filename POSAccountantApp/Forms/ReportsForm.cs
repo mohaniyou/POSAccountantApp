@@ -48,7 +48,8 @@ namespace POSAccountantApp
             // Form settings
             this.Text = "Reports";
             this.Size = new Size(1200, 800);
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Dock = DockStyle.Fill;
+            this.AutoScroll = true;
 
             // Tab Control
             this.tabReports.Dock = DockStyle.Fill;

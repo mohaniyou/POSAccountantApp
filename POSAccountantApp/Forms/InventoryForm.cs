@@ -44,7 +44,8 @@ namespace POSAccountantApp
             // Form settings
             this.Text = "Inventory Management";
             this.Size = new Size(1000, 600);
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Dock = DockStyle.Fill;
+            this.AutoScroll = true;
 
             // Search TextBox
             this.txtSearch.Size = new Size(200, 23);

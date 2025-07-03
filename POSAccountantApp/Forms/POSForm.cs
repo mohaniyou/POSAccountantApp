@@ -62,7 +62,8 @@ namespace POSAccountantApp
             // Form settings
             this.Text = "Point of Sale";
             this.Size = new Size(1200, 700);
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Dock = DockStyle.Fill;
+            this.AutoScroll = true;
 
             // Barcode TextBox
             this.txtBarcode.Size = new Size(200, 30);

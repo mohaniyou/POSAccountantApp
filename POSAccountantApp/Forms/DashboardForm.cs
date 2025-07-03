@@ -152,16 +152,33 @@ namespace POSAccountantApp
             // Additional dashboard setup if needed
         }
 
+        private Form activeForm = null;
+
+        private void OpenForm(Form form)
+        {
+            if (activeForm != null)
+            {
+                activeForm.Close();
+            }
+
+            activeForm = form;
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            mainContent.Controls.Add(form);
+            form.Show();
+        }
+
         private void BtnPOS_Click(object sender, EventArgs e)
         {
             var posForm = new POSForm(currentUser);
-            posForm.ShowDialog();
+            OpenForm(posForm);
         }
 
         private void BtnInventory_Click(object sender, EventArgs e)
         {
             var inventoryForm = new InventoryForm(currentUser);
-            inventoryForm.ShowDialog();
+            OpenForm(inventoryForm);
         }
 
         private void BtnAccounting_Click(object sender, EventArgs e)
@@ -173,7 +190,7 @@ namespace POSAccountantApp
         private void BtnReports_Click(object sender, EventArgs e)
         {
             var reportsForm = new ReportsForm(currentUser);
-            reportsForm.ShowDialog();
+            OpenForm(reportsForm);
         }
 
         private void BtnUsers_Click(object sender, EventArgs e)
